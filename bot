@@ -1,0 +1,17 @@
+import requests
+
+API_ENDPOINT = 'https://discord.com/api/v10'
+CLIENT_ID = '1306957996986859520'
+CLIENT_SECRET = 'WBPOUbvKnVG7_fulGrH5AKkY7-zUyKC1'
+
+def refresh_token(refresh_token):
+  data = {
+    'grant_type': 'refresh_token',
+    'refresh_token': refresh_token
+  }
+  headers = {
+    'Content-Type': 'application/x-www-form-urlencoded'
+  }
+  r = requests.post('%s/oauth2/token' % API_ENDPOINT, data=data, headers=headers, auth=(CLIENT_ID, CLIENT_SECRET))
+  r.raise_for_status()
+  return r.json()
